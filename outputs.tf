@@ -16,6 +16,12 @@ output "resource_id" {
 }
 
 output "system_assigned_mi_principal_id" {
-  description = "The principal ID of system assigned managed identity on the cognitive account created, when `var.managed_identities` is `null` or `var.managed_identities.system_assigned` is `false` this output is `null`."
+  description = "The principal ID of system assigned managed identity on the search service created, when `var.managed_identities` is `null` or `var.managed_identities.system_assigned` is `false` this output is `null`."
   value       = try(var.managed_identities.system_assigned, false) ? azurerm_search_service.this.identity[0].principal_id : null
+}
+
+# debug output
+output "identity" {
+  description = "The identity block."
+  value       = azurerm_search_service.this.identity
 }
